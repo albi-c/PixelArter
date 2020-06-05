@@ -3,14 +3,19 @@ package io.github.albi_c.pixelarter.images;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import io.github.albi_c.pixelarter.PixelArter;
+
 public class Assets {
 	private String[] paths = {"pencil.png", "eraser.png", "rect.png", "fillrect.png", "line.png", "bucket.png", "save.png", "saveas.png", "load.png", "new.png", "picker.png", "undo.png"};
 	private String basepath = "/res/";
 	private ImageLoader loader = new ImageLoader();
 	public BufferedImage pencil, eraser, rect, fillrect, line, bucket, picker, save, saveas, load, new_, undo;
 	public int selectedImage = 0;
+	private PixelArter art;
 	
-	public Assets() {
+	public Assets(PixelArter art) {
+		this.art = art;
+		
 		pencil = loader.loadImage(basepath + paths[0]);
 		eraser = loader.loadImage(basepath + paths[1]);
 		rect = loader.loadImage(basepath + paths[2]);
@@ -55,8 +60,40 @@ public class Assets {
 		}
 		if (out != null) {
 			if (n == this.selectedImage) {
-				out = this.tint(1, 1, 0, 1, out);
+				float[] tc = this.art.settings.selectedToolColor;
+				out = this.tint(tc[0], tc[1], tc[2], tc[3], out);
+			} else {
+				float[] tc = this.art.settings.notSelectedToolColor;
+				out = this.tint(tc[0], tc[1], tc[2], tc[3], out);
 			}
+		}
+		return out;
+	}
+	
+	public BufferedImage getTopImage(int n) {
+		BufferedImage out = null;
+		switch (n) {
+			case 0:
+				out = this.save;
+				break;
+			case 1:
+				out = this.saveas;
+				break;
+			case 2:
+				out = this.load;
+				break;
+			case 3:
+				out = this.new_;
+				break;
+			case 4:
+				out = this.undo;
+				break;
+			default:
+				break;
+		}
+		if (out != null) {
+			float[] tc = this.art.settings.topToolbarColor;
+			out = this.tint(tc[0], tc[1], tc[2], tc[3], out);
 		}
 		return out;
 	}

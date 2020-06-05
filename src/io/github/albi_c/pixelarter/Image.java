@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Image {
-	private Pixel[][] img = new Pixel[64][64];
+	private Pixel[][] img = new Pixel[70][70];
 	public int w;
 	public int h;
 	public int[] selColor = {255, 255, 255, 255};

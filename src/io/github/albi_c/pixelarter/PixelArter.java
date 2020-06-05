@@ -16,6 +16,8 @@ import java.lang.Math;
 import io.github.albi_c.pixelarter.images.Assets;
 import io.github.albi_c.pixelarter.images.ImageReader;
 import io.github.albi_c.pixelarter.images.ImageWriter;
+import io.github.albi_c.pixelarter.settings.Settings;
+import io.github.albi_c.pixelarter.settings.YamlParser;
 import io.github.albi_c.pixelarter.tools.Bucket;
 import io.github.albi_c.pixelarter.tools.Eraser;
 import io.github.albi_c.pixelarter.tools.FillRect;
@@ -41,6 +43,8 @@ public class PixelArter extends Canvas implements Runnable {
 	ToolHandler handler;
 	Assets assets;
 	FileChooser fileChooser;
+	YamlParser yamlParser;
+	public Settings settings;
 	public ImageHistory history;
 	
 	ImageWriter writer = new ImageWriter();
@@ -56,16 +60,19 @@ public class PixelArter extends Canvas implements Runnable {
 	
 	private void init() {
 		this.reader = new ImageReader(this);
+		this.yamlParser = new YamlParser();
+		this.settings = this.yamlParser.getYamlSettings();
 		
 		WIDTH = getWidth();
 		HEIGHT = getHeight();
 		
-		assets = new Assets();
+		assets = new Assets(this);
 		fileChooser = new FileChooser(this);
 		
 		this.pixelsize = (int) Math.floor((HEIGHT - 100) / imgsize);
 		
-		this.img = new Image(imgsize, imgsize, this);
+		this.img = new Image(this.settings.defaultImageSize, this.settings.defaultImageSize, this);
+		this.windowEvent("resize");
 		this.history = new ImageHistory(this.img);
 		
 		Pencil pencil = new Pencil(this.img);
@@ -219,14 +226,9 @@ public class PixelArter extends Canvas implements Runnable {
 		if (result == null)
 			return null;
 		result = result.replaceAll(" ", "");
-		boolean ok = result.matches("^[1-6][0-9]x[1-6][0-9]$");
+		boolean ok = result.matches("^[1-6][0-9]$");
 		if (ok) {
-			String[] spl = result.split("x");
-			if (spl.length == 2) {
-				return new int[] {Integer.parseInt(spl[0]), Integer.parseInt(spl[1])};
-			} else {
-				return null;
-			}
+			return new int[] {Integer.parseInt(result), Integer.parseInt(result)};
 		}
 		return null;
 	}
@@ -281,7 +283,7 @@ public class PixelArter extends Canvas implements Runnable {
 		if (name == "resize") {
 			WIDTH = getWidth();
 			HEIGHT = getHeight();
-			this.imgsize = this.img.w;
+			this.imgsize = this.img.h;
 			this.pixelsize = (int) Math.floor((HEIGHT - 100) / this.imgsize);
 		}
 	}
@@ -358,11 +360,11 @@ public class PixelArter extends Canvas implements Runnable {
 		g.drawImage(this.assets.getImage(5), 10, this.imgOffsetY + 42 * 6, 32, 32, null);
 		g.drawImage(this.assets.getImage(6), 10, this.imgOffsetY + 42 * 7, 32, 32, null);
 		
-		g.drawImage(this.assets.save, this.imgOffsetX + 10, 10, 32, 32, null);
-		g.drawImage(this.assets.saveas, this.imgOffsetX + 52, 10, 32, 32, null);
-		g.drawImage(this.assets.load, this.imgOffsetX + 47 * 2, 10, 32, 32, null);
-		g.drawImage(this.assets.new_, this.imgOffsetX + 45 * 3, 10, 32, 32, null);
-		g.drawImage(this.assets.undo, this.imgOffsetX + 44 * 4, 10, 32, 32, null);
+		g.drawImage(this.assets.getTopImage(0), this.imgOffsetX + 10, 10, 32, 32, null);
+		g.drawImage(this.assets.getTopImage(1), this.imgOffsetX + 52, 10, 32, 32, null);
+		g.drawImage(this.assets.getTopImage(2), this.imgOffsetX + 47 * 2, 10, 32, 32, null);
+		g.drawImage(this.assets.getTopImage(3), this.imgOffsetX + 45 * 3, 10, 32, 32, null);
+		g.drawImage(this.assets.getTopImage(4), this.imgOffsetX + 44 * 4, 10, 32, 32, null);
 		
 		////////////////////////////////////
 		
