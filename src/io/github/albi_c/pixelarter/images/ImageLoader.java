@@ -1,0 +1,33 @@
+package io.github.albi_c.pixelarter.images;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+
+import io.github.albi_c.pixelarter.PixelArter;
+
+public class ImageLoader {
+	public BufferedImage loadImage(String path) {
+		/*
+		try {
+			File f = new File(path);
+			return ImageIO.read(f);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		return null;
+		*/
+		
+		URL imgUrl = PixelArter.class.getResource(path);
+		try {
+			if (imgUrl != null)
+				return ImageIO.read(imgUrl);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+}
