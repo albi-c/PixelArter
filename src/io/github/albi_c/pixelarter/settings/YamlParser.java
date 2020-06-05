@@ -19,8 +19,9 @@ public class YamlParser {
 			   												 "selectedToolColor: [0.0, 1.0, 1.0, 1.0]",
 			   												 "notSelectedToolColor: [1.0, 1.0, 1.0, 1.0]",
 			   												 "topToolbarColor: [1.0, 1.0, 1.0, 1.0]",
-			   												 "defaultImageSize: 32");
-	public static Settings defaultSettings = YamlParser.createDefaultSettings();
+			   												 "defaultImageSize: 32",
+			   												 "defaultWindowSize: [1000, 700]");
+	public static Settings defaultSettings = new Settings();
 	
 	public YamlParser() {
 		this.settingsFile = Paths.get(this.homePath, this.settingsFile).toString();
@@ -53,15 +54,6 @@ public class YamlParser {
 				}
 			}
 		}
-	}
-	
-	public static Settings createDefaultSettings() {
-		Settings s = new Settings();
-		s.selectedToolColor = new float[] {0, 1, 1, 0};
-		s.notSelectedToolColor = new float[] {1, 1, 1, 0};
-		s.topToolbarColor = new float[] {1, 1, 1, 0};
-		s.defaultImageSize = 32;
-		return s;
 	}
 	
 	public Settings getYamlSettings() {

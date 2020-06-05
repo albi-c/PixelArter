@@ -34,7 +34,7 @@ public class PixelArter extends Canvas implements Runnable {
 	private boolean running = false;
 	Thread thread;
 	
-	public int WIDTH, HEIGHT;
+	public int WIDTH = 1280, HEIGHT = 720;
 	
 	Random rand = new Random();
 	
@@ -63,8 +63,10 @@ public class PixelArter extends Canvas implements Runnable {
 		this.yamlParser = new YamlParser();
 		this.settings = this.yamlParser.getYamlSettings();
 		
-		WIDTH = getWidth();
-		HEIGHT = getHeight();
+		//WIDTH = getWidth();
+		//HEIGHT = getHeight();
+		WIDTH = this.settings.defaultWindowSize[0];
+		HEIGHT = this.settings.defaultWindowSize[1];
 		
 		assets = new Assets(this);
 		fileChooser = new FileChooser(this);
