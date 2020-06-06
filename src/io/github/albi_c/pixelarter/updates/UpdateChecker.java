@@ -10,7 +10,7 @@ import io.github.albi_c.pixelarter.PixelArter;
 public class UpdateChecker {
 	public String getLatestVersion() {
 		try {
-			URL url = new URL("https://raw.githubusercontent.com/albi-c/PixelArter/master/src/VERSION.txt");
+			URL url = new URL("https://raw.githubusercontent.com/albi-c/PixelArter/master/src/VERSION/VERSION.txt");
 			Scanner s = new Scanner(url.openStream());
 			String out = s.nextLine();
 			s.close();
