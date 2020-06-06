@@ -27,6 +27,8 @@ import io.github.albi_c.pixelarter.tools.Picker;
 import io.github.albi_c.pixelarter.tools.Rect;
 import io.github.albi_c.pixelarter.tools.Tool;
 import io.github.albi_c.pixelarter.tools.ToolHandler;
+import io.github.albi_c.pixelarter.updates.UpdateChecker;
+import io.github.albi_c.pixelarter.updates.Updater;
 
 public class PixelArter extends Canvas implements Runnable {
 	private static final long serialVersionUID = -4108775352043798144L;
@@ -46,6 +48,8 @@ public class PixelArter extends Canvas implements Runnable {
 	YamlParser yamlParser;
 	public Settings settings;
 	public ImageHistory history;
+	public UpdateChecker checker = new UpdateChecker();
+	public Updater updater;
 	
 	ImageWriter writer = new ImageWriter();
 	ImageReader reader;
@@ -62,9 +66,11 @@ public class PixelArter extends Canvas implements Runnable {
 		this.reader = new ImageReader(this);
 		this.yamlParser = new YamlParser();
 		this.settings = this.yamlParser.getYamlSettings();
+		this.updater = new Updater(this);
+		if (this.settings.automaticUpdates) {
+			this.updater.update();
+		}
 		
-		//WIDTH = getWidth();
-		//HEIGHT = getHeight();
 		WIDTH = this.settings.defaultWindowSize[0];
 		HEIGHT = this.settings.defaultWindowSize[1];
 		

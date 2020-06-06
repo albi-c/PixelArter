@@ -6,4 +6,5 @@ public class Settings {
 	public float[] topToolbarColor = {1, 1, 1, 1};
 	public int defaultImageSize = 32;
 	public int[] defaultWindowSize = {1000, 700};
+	public boolean automaticUpdates = true;
 }

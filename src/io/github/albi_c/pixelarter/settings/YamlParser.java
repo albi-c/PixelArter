@@ -20,7 +20,8 @@ public class YamlParser {
 			   												 "notSelectedToolColor: [1.0, 1.0, 1.0, 1.0]",
 			   												 "topToolbarColor: [1.0, 1.0, 1.0, 1.0]",
 			   												 "defaultImageSize: 32",
-			   												 "defaultWindowSize: [1000, 700]");
+			   												 "defaultWindowSize: [1000, 700]",
+			   												 "automaticUpdates: true");
 	public static Settings defaultSettings = new Settings();
 	
 	public YamlParser() {
