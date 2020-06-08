@@ -27,11 +27,11 @@ public class Updater {
 			String os = System.getProperty("os.name").toLowerCase();
 			try {
 				if (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") >= 0) {
-					rt.exec("wget https://github.com/albi-c/PixelArter/releases/download/v" + latestVer + "/PixelArter-v" +
+					rt.exec("wget https://github.com/albi-c/PixelArter/releases/download/v" + latestVer + "/PixelArter-" +
 							latestVer + ".jar PixelArter.jar -O PixelArter-download.jar");
 					rt.exec("mv -f PixelArter-download.jar " + jarPath);
 				} else if (os.indexOf("win") >= 0) {
-					URL url = new URL("https://github.com/albi-c/PixelArter/releases/download/v" + latestVer + "/PixelArter-v" + 
+					URL url = new URL("https://github.com/albi-c/PixelArter/releases/download/v" + latestVer + "/PixelArter-" + 
 									  latestVer + ".jar");
 					ReadableByteChannel rbc = Channels.newChannel(url.openStream());
 					FileOutputStream fos = new FileOutputStream("PixelArter-download.jar");
