@@ -21,7 +21,8 @@ public class YamlParser {
 			   												 "topToolbarColor: [1.0, 1.0, 1.0, 1.0]",
 			   												 "defaultImageSize: 32",
 			   												 "defaultWindowSize: [1000, 700]",
-			   												 "automaticUpdates: true");
+			   												 "automaticUpdates: true",
+			   												 "keyboardShortcuts: true");
 	public static Settings defaultSettings = new Settings();
 	
 	public YamlParser() {

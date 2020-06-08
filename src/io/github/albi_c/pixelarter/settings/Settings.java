@@ -7,4 +7,5 @@ public class Settings {
 	public int defaultImageSize = 32;
 	public int[] defaultWindowSize = {1000, 700};
 	public boolean automaticUpdates = true;
+	public boolean keyboardShortcuts = true;
 }

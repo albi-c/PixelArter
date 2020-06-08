@@ -143,12 +143,12 @@ public class PixelArter extends Canvas implements Runnable {
 		}
 	}
 	
-	private void changeColor() {
+	public void changeColor() {
 		Color col = JColorChooser.showDialog(this.window.frame, "Choose color", new Color(this.img.selColor[0], this.img.selColor[1], this.img.selColor[2]));
 		this.img.selColor =  new int[] {col.getRed(), col.getGreen(), col.getBlue(), 255};
 	}
 	
-	private void selectTool(int t) {
+	public void selectTool(int t) {
 		for (int i = 0; i < this.handler.tools.length; i++) {
 			this.handler.tools[i].setSelected(false);
 		}
@@ -249,7 +249,7 @@ public class PixelArter extends Canvas implements Runnable {
 		this.refreshToolsImage();
 	}
 	
-	private void fileOperation(int o) {
+	public void fileOperation(int o) {
 		if (o == 0) {
 			this.saveImage();
 		} else if (o == 1) {
