@@ -69,6 +69,11 @@ public class PixelArter extends Canvas implements Runnable {
 		this.updater = new Updater(this);
 		if (this.settings.automaticUpdates) {
 			this.updater.update();
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+			}
+			this.updater.update();
 		}
 		
 		WIDTH = this.settings.defaultWindowSize[0];
